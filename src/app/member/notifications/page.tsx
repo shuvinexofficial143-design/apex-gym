@@ -1,0 +1,3 @@
+import { MemberShell } from "@/components/member/MemberShell";
+import { notifications } from "@/lib/member-data";
+export default function Page(){return <MemberShell title="Notifications" subtitle="Membership, workout and account updates."><div style={{display:"grid",gap:12}}>{notifications.map(x=><article key={x.title} className="glass-card" style={{padding:22,borderColor:x.unread?"rgba(223,255,0,.28)":undefined}}><div style={{display:"flex",justifyContent:"space-between",gap:16}}><strong>{x.title}</strong><span className="muted" style={{fontSize:12}}>{x.time}</span></div><p className="muted" style={{lineHeight:1.65,marginBottom:0}}>{x.copy}</p></article>)}</div></MemberShell>}

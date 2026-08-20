@@ -1,0 +1,14 @@
+"use client";
+import Link from "next/link";
+import {usePathname} from "next/navigation";
+const groups=[
+["Dashboard",[["Overview","/member"],["AI Assistant","/member/ai"],["Recommendations","/member/recommendations"]]],
+["Training",[["Workouts","/member/workouts"],["Workout Logger","/member/workouts/logger"],["Progress","/member/progress"],["Classes","/member/classes"]]],
+["Nutrition",[["Nutrition","/member/diet"],["Diet Planner","/member/diet/planner"],["Fitness Tools","/member/tools"]]],
+["Membership",[["QR Pass","/member/qr-pass"],["Attendance","/member/attendance"],["Occupancy","/member/occupancy"],["Membership","/member/membership"],["Payments","/member/payments"]]],
+["Community",[["Challenges","/member/challenges"],["Leaderboard","/member/leaderboard"],["Rewards","/member/rewards"],["Store","/member/store"]]]
+] as const;
+export function MemberSidebar(){const p=usePathname();const active=(h:string)=>h==="/member"?p===h:p===h||p.startsWith(h+"/");return <aside className="member-sidebar apex-scroll" style={{position:"fixed",inset:"0 auto 0 0",width:260,padding:20,borderRight:"1px solid var(--line)",background:"radial-gradient(circle at 15% 8%,rgba(223,255,0,.065),transparent 22%),#0b0b0b",zIndex:30,overflowY:"auto"}}>
+<Link href="/" style={{display:"flex",alignItems:"center",gap:10,fontWeight:1000,fontSize:18}}><span style={{width:38,height:38,display:"grid",placeItems:"center",background:"var(--accent)",color:"#080808",borderRadius:12}}>A</span>APEX MEMBER</Link>
+<div style={{marginTop:26,display:"grid",gap:20,paddingBottom:26}}>{groups.map(([g,items])=><section key={g}><div className="muted" style={{fontSize:9,fontWeight:1000,letterSpacing:".16em",margin:"0 10px 8px"}}>{g.toUpperCase()}</div><nav style={{display:"grid",gap:6}}>{items.map(([l,h])=>{const a=active(h);return <Link key={h} href={h} style={{minHeight:42,display:"flex",alignItems:"center",padding:"0 12px",borderRadius:12,border:a?"1px solid rgba(223,255,0,.42)":"1px solid transparent",background:a?"rgba(223,255,0,.09)":"transparent",color:a?"var(--accent)":"#f4f4f4",fontSize:12,fontWeight:a?1000:800}}>{l}</Link>})}</nav></section>)}</div>
+<style>{`@media(max-width:980px){.member-sidebar{inset:auto 0 0 0!important;width:auto!important;height:70px;display:flex;align-items:center;overflow-x:auto;overflow-y:hidden;padding:10px 12px!important;border-right:none!important;border-top:1px solid var(--line)}.member-sidebar>a{display:none!important}.member-sidebar>div{display:flex!important;margin:0!important;padding:0!important;gap:8px!important}.member-sidebar section{display:contents!important}.member-sidebar section>div{display:none!important}.member-sidebar nav{display:flex!important;gap:8px!important}.member-sidebar nav a{white-space:nowrap;padding:0 13px!important}}`}</style></aside>}
