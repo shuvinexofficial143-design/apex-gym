@@ -1,6 +1,6 @@
 "use client";
-
 import { FormEvent, useState } from "react";
+import { MarkdownText } from "./MarkdownText";
 
 export function AIDietGenerator() {
   const [result, setResult] = useState("");
@@ -9,8 +9,6 @@ export function AIDietGenerator() {
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setLoading(true);
-    setResult("");
-
     const form = new FormData(event.currentTarget);
     const prompt = [
       `Goal: ${form.get("goal")}`,
@@ -19,22 +17,13 @@ export function AIDietGenerator() {
       `Protein target: ${form.get("protein")} g/day`,
       `Meals per day: ${form.get("meals")}`,
       `Foods to avoid/preferences: ${form.get("notes") || "None stated"}`,
-      "Create a practical one-day meal structure with approximate calories and protein per meal. Keep it general and non-medical.",
+      "Create a practical one-day meal structure with approximate calories and protein per meal.",
     ].join("\n");
 
     try {
-      const response = await fetch("/api/ai", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          mode: "diet",
-          messages: [{ role: "user", content: prompt }],
-        }),
-      });
+      const response = await fetch("/api/ai", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ mode: "diet", messages: [{ role: "user", content: prompt }] }) });
       const data = (await response.json()) as { text?: string; error?: string };
       setResult(data.text || data.error || "No plan generated.");
-    } catch {
-      setResult("The AI service could not be reached. Check the server configuration and try again.");
     } finally {
       setLoading(false);
     }
@@ -48,17 +37,13 @@ export function AIDietGenerator() {
         <label style={label}><span>Daily calories</span><input name="calories" type="number" min={1200} max={5000} defaultValue={2400} style={field} /></label>
         <label style={label}><span>Protein target</span><input name="protein" type="number" min={40} max={300} defaultValue={150} style={field} /></label>
         <label style={label}><span>Meals per day</span><input name="meals" type="number" min={2} max={7} defaultValue={4} style={field} /></label>
-        <label style={label}><span>Preferences</span><textarea name="notes" placeholder="Example: simple Indian foods, no peanuts..." style={{ ...field, minHeight: 100, padding: 14 }} /></label>
+        <label style={label}><span>Preferences</span><textarea name="notes" style={{ ...field, minHeight: 100, padding: 14 }} /></label>
         <button disabled={loading} style={button}>{loading ? "Generating…" : "Generate Diet Structure"}</button>
       </form>
 
       <div className="glass-card" style={{ padding: 26, minHeight: 560 }}>
         <div className="eyebrow">AI nutrition plan</div>
-        {result ? <div style={{ marginTop: 18, whiteSpace: "pre-wrap", lineHeight: 1.8 }}>{result}</div> : (
-          <p className="muted" style={{ lineHeight: 1.7 }}>
-            Generate a practical food structure from your own calorie and protein targets. This feature is not a substitute for medical nutrition care.
-          </p>
-        )}
+        <div style={{ marginTop: 18 }}>{result ? <MarkdownText text={result} /> : <p className="muted">Generate a practical food structure from your targets.</p>}</div>
       </div>
 
       <style>{`@media(max-width:800px){.generator-grid{grid-template-columns:1fr!important}}`}</style>
