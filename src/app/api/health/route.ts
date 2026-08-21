@@ -5,7 +5,9 @@ export function GET() {
     ok: true,
     service: "apex-gym",
     version: "0.1.0",
-    aiConfigured: Boolean(process.env.GROQ_API_KEY),
+    aiProvider: "openai",
+    aiModel: process.env.OPENAI_MODEL || "gpt-4o-mini",
+    aiConfigured: Boolean(process.env.OPENAI_API_KEY),
     timestamp: new Date().toISOString(),
   });
 }

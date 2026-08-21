@@ -11,27 +11,41 @@ type AIRequest = {
   profile?: Record<string, unknown>;
 };
 
-const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
+const OPENAI_URL = "https://api.openai.com/v1/chat/completions";
 
-function systemPrompt(mode: AIRequest["mode"], profile?: Record<string, unknown>) {
+function systemPrompt(
+  mode: AIRequest["mode"],
+  profile?: Record<string, unknown>,
+) {
   const base = `
 You are APEX AI, a fitness assistant inside a premium gym member platform.
+
 Be practical, concise and structured.
 Do not diagnose medical conditions or injuries.
-If the user describes significant pain, injury, fainting, breathing difficulty, medication issues, eating-disorder behavior, pregnancy-specific risk, or another medical concern, tell them to seek an appropriate qualified clinician instead of giving a diagnosis.
-Do not promise guaranteed results.
+If the user describes significant pain, injury, fainting, breathing difficulty, medication issues, eating-disorder behavior, pregnancy-specific risk, or another medical concern, advise them to seek an appropriate qualified clinician instead of giving a diagnosis.
+Do not promise guaranteed fitness results.
 For exercise plans, include progression and recovery guidance.
-For food plans, treat calorie/macronutrient values as approximate and keep guidance general rather than clinical.
-The user's optional profile is: ${JSON.stringify(profile ?? {})}.
+For nutrition plans, treat calorie and macronutrient values as approximate and keep guidance general rather than clinical.
+
+Optional member profile:
+${JSON.stringify(profile ?? {})}
 `.trim();
 
   if (mode === "workout") {
-    return `${base}\nCreate workout plans with clear days, exercises, sets, reps, rest and simple progression notes.`;
+    return `${base}
+
+Create workout plans with clear training days, exercises, sets, reps, rest periods and simple progression notes.`;
   }
+
   if (mode === "diet") {
-    return `${base}\nCreate practical meal structures with approximate calories and protein. Avoid medical diet prescriptions.`;
+    return `${base}
+
+Create practical meal structures with approximate calories and protein. Avoid medical diet prescriptions.`;
   }
-  return `${base}\nAnswer member questions about training, recovery, nutrition structure and gym usage.`;
+
+  return `${base}
+
+Answer questions about training, recovery, general nutrition structure and gym usage.`;
 }
 
 function demoFallback(mode: AIRequest["mode"]) {
@@ -52,7 +66,8 @@ Day 2 — Lower Strength
 • Hamstring Curl — 3 × 12
 • Calf Raise — 3 × 15
 
-Progression: when all target reps are completed with good form, add a small amount of load next session. Keep 1–3 reps in reserve on most working sets.`;
+Progression:
+When all target reps are completed with good form, add a small amount of load next session. Keep 1–3 reps in reserve on most working sets.`;
   }
 
   if (mode === "diet") {
@@ -70,27 +85,31 @@ Pre-workout
 Dinner
 • Roti/rice + protein source + vegetables + salad
 
-Use your own calorie and protein targets from the APEX calculators. Portion sizes should be adjusted to those targets.`;
+Use your own calorie and protein targets from the APEX calculators and adjust portion sizes to those targets.`;
   }
 
-  return `I’m running in DEMO AI MODE because GROQ_API_KEY is not configured yet.
+  return `I’m currently running in DEMO AI MODE because OPENAI_API_KEY is not configured yet.
 
-I can still demonstrate the assistant flow. For example, I can structure a 4-day workout around Upper / Lower sessions, keep progression gradual, and use the dashboard’s calorie/protein targets for general nutrition planning.
-
-Add GROQ_API_KEY to .env.local to enable live AI responses.`;
+Once the OpenAI API key is added, I can answer live fitness questions and generate workout or diet structures using GPT-4o mini.`;
 }
 
 export async function POST(request: Request) {
   try {
     const body = (await request.json()) as AIRequest;
     const mode = body.mode ?? "chat";
-    const messages = Array.isArray(body.messages) ? body.messages.slice(-12) : [];
+    const messages = Array.isArray(body.messages)
+      ? body.messages.slice(-12)
+      : [];
 
     if (messages.length === 0) {
-      return NextResponse.json({ error: "At least one message is required." }, { status: 400 });
+      return NextResponse.json(
+        { error: "At least one message is required." },
+        { status: 400 },
+      );
     }
 
-    const apiKey = process.env.GROQ_API_KEY;
+    const apiKey = process.env.OPENAI_API_KEY;
+
     if (!apiKey) {
       return NextResponse.json({
         text: demoFallback(mode),
@@ -98,18 +117,21 @@ export async function POST(request: Request) {
       });
     }
 
-    const response = await fetch(GROQ_URL, {
+    const response = await fetch(OPENAI_URL, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: process.env.GROQ_MODEL || "llama-3.1-8b-instant",
+        model: process.env.OPENAI_MODEL || "gpt-4o-mini",
         temperature: 0.4,
-        max_completion_tokens: 1200,
+        max_tokens: 1200,
         messages: [
-          { role: "system", content: systemPrompt(mode, body.profile) },
+          {
+            role: "system",
+            content: systemPrompt(mode, body.profile),
+          },
           ...messages.map((message) => ({
             role: message.role,
             content: message.content,
@@ -121,29 +143,47 @@ export async function POST(request: Request) {
 
     if (!response.ok) {
       const detail = await response.text();
-      console.error("Groq API error:", response.status, detail);
+      console.error(
+        "OpenAI API error:",
+        response.status,
+        detail.slice(0, 500),
+      );
+
       return NextResponse.json({
         text: demoFallback(mode),
         provider: "demo",
-        warning: "Live AI request failed; demo response returned.",
+        warning: "Live OpenAI request failed; demo response returned.",
       });
     }
 
     const data = (await response.json()) as {
-      choices?: Array<{ message?: { content?: string } }>;
+      choices?: Array<{
+        message?: {
+          content?: string;
+        };
+      }>;
     };
 
     const text = data.choices?.[0]?.message?.content?.trim();
+
     if (!text) {
-      return NextResponse.json({ text: demoFallback(mode), provider: "demo" });
+      return NextResponse.json({
+        text: demoFallback(mode),
+        provider: "demo",
+      });
     }
 
     return NextResponse.json({
       text,
-      provider: "groq",
+      provider: "openai",
+      model: process.env.OPENAI_MODEL || "gpt-4o-mini",
     });
   } catch (error) {
     console.error("AI route failure:", error);
-    return NextResponse.json({ error: "AI request failed." }, { status: 500 });
+
+    return NextResponse.json(
+      { error: "AI request failed." },
+      { status: 500 },
+    );
   }
 }
