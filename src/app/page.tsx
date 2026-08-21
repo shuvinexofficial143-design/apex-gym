@@ -1,29 +1,27 @@
-import { AboutPreview } from "@/components/home/AboutPreview";
-import { CTA } from "@/components/home/CTA";
-import { Hero } from "@/components/home/Hero";
-import { MembershipPreview } from "@/components/home/MembershipPreview";
-import { ProgramsPreview } from "@/components/home/ProgramsPreview";
-import { Stats } from "@/components/home/Stats";
-import { Testimonials } from "@/components/home/Testimonials";
-import { TrainersPreview } from "@/components/home/TrainersPreview";
-import { TransformationSlider } from "@/components/home/TransformationSlider";
-import { Footer } from "@/components/layout/Footer";
-import { Navbar } from "@/components/layout/Navbar";
+import { RealVisualHero } from "@/components/home/RealVisualHero";
+import { FeatureRibbon } from "@/components/home/FeatureRibbon";
+import { PhotoFeatureGrid } from "@/components/home/PhotoFeatureGrid";
+import { TrainerShowcase } from "@/components/home/TrainerShowcase";
+import { TransformationShowcase } from "@/components/home/TransformationShowcase";
+import { MobilePromoSection } from "@/components/home/MobilePromoSection";
+import { ShowcaseGallery } from "@/components/home/ShowcaseGallery";
+import { appShowcaseSlides } from "@/components/home/home-showcase-data";
 
-export default function Home() {
+export default function Page() {
   return (
-    <main>
-      <Navbar />
-      <Hero />
-      <Stats />
-      <AboutPreview />
-      <ProgramsPreview />
-      <MembershipPreview />
-      <TrainersPreview />
-      <TransformationSlider />
-      <Testimonials />
-      <CTA />
-      <Footer />
+    <main style={{ overflowX: "clip" }}>
+      <RealVisualHero />
+      <FeatureRibbon />
+      <PhotoFeatureGrid />
+      <ShowcaseGallery
+        eyebrow="APEX MOBILE"
+        title="One app. Every part of your fitness."
+        subtitle="Workout planning, food, recovery and member progress are shown with richer app-style visuals."
+        slides={appShowcaseSlides}
+      />
+      <TrainerShowcase />
+      <TransformationShowcase />
+      <MobilePromoSection />
     </main>
   );
 }
