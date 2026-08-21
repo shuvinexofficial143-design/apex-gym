@@ -65,20 +65,30 @@ export function Hero() {
       <HeroScrollCue />
 
       <style>{`
+        .apex-hero__copy,
+        .apex-hero__side {
+          min-width: 0;
+          max-width: 100%;
+        }
+
         .apex-hero__title {
           display: flex;
           flex-direction: column;
-          width: max-content;
+          width: 100%;
           max-width: 100%;
           margin: 22px 0 0;
           font-size: clamp(66px,9.4vw,138px);
           line-height: .76;
           letter-spacing: -.075em;
           text-transform: uppercase;
+          overflow: hidden;
         }
 
         .apex-hero__word {
           display: block;
+          width: 100%;
+          max-width: 100%;
+          white-space: nowrap;
           opacity: 0;
           transform: translateY(38px);
           animation: apexHeroWordIn .78s cubic-bezier(.2,.8,.2,1) forwards;
@@ -164,31 +174,58 @@ export function Hero() {
         @media(max-width:900px){
           .apex-hero__layout{
             grid-template-columns:1fr!important;
-            padding-top:88px!important;
+            gap:28px!important;
+            padding-top:72px!important;
           }
 
           .apex-hero__side{
+            width:100%;
             max-width:620px;
           }
 
           .apex-hero__title{
-            font-size:clamp(64px,14vw,112px);
+            font-size:clamp(58px,13.5vw,104px);
+            line-height:.80;
+            letter-spacing:-.065em;
           }
         }
 
         @media(max-width:620px){
           .apex-hero__layout{
-            padding-bottom:50px!important;
+            padding-top:56px!important;
+            padding-bottom:44px!important;
           }
 
           .apex-hero__title{
-            font-size:clamp(56px,18vw,86px);
-            line-height:.80;
+            font-size:clamp(48px,15vw,72px);
+            line-height:.82;
+            letter-spacing:-.06em;
           }
 
           .apex-hero__description{
             font-size:15px;
             margin-top:24px;
+          }
+
+          .apex-hero__actions{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            width:100%;
+          }
+
+          .apex-hero__actions > *{
+            width:100%;
+            justify-content:center;
+          }
+        }
+
+        @media(max-width:390px){
+          .apex-hero__title{
+            font-size:clamp(46px,14.6vw,64px);
+          }
+
+          .apex-hero__actions{
+            grid-template-columns:1fr;
           }
         }
 
