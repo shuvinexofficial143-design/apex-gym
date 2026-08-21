@@ -1,0 +1,99 @@
+name: APEX QA
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Production build
+        run: npm run build
+
+      - name: Start production server
+        run: |
+          npm run start > /tmp/apex-next.log 2>&1 &
+          echo $! > /tmp/apex-next.pid
+
+      - name: Wait for server
+        shell: bash
+        run: |
+          for i in {1..45}; do
+            if curl -fsS http://127.0.0.1:3000/api/health > /dev/null; then
+              echo "APEX server is ready"
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/apex-next.log || true
+          exit 1
+
+      - name: Smoke-test core routes
+        shell: bash
+        run: |
+          routes=(
+            "/"
+            "/about"
+            "/programs"
+            "/membership"
+            "/trainers"
+            "/classes"
+            "/free-trial"
+            "/member"
+            "/member/ai"
+            "/member/workouts"
+            "/member/diet"
+            "/member/progress"
+            "/trainer"
+            "/trainer/clients"
+            "/admin"
+            "/admin/analytics"
+            "/api/health"
+            "/robots.txt"
+            "/sitemap.xml"
+          )
+
+          for route in "${routes[@]}"; do
+            echo "Checking ${route}"
+            if ! curl -fsS -o /dev/null "http://127.0.0.1:3000${route}"; then
+              echo "FAILED: ${route}"
+              cat /tmp/apex-next.log || true
+              exit 1
+            fi
+          done
+
+          echo "All core routes passed."
+
+      - name: Stop server
+        if: always()
+        shell: bash
+        run: |
+          if [ -f /tmp/apex-next.pid ]; then
+            kill "$(cat /tmp/apex-next.pid)" 2>/dev/null || true
+          fi
