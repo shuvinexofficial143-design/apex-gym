@@ -64,6 +64,7 @@ export const trainersDetailed = [
     experience: "8 years",
     certification: "CPT · S&C",
     bio: "Barbell strength, movement quality and progressive programming for long-term results.",
+    src: "https://images.unsplash.com/photo-1567013127542-490d757e51fc?auto=format&fit=crop&w=900&q=85",
   },
   {
     initials: "NS",
@@ -72,6 +73,7 @@ export const trainersDetailed = [
     experience: "7 years",
     certification: "CPT · Nutrition",
     bio: "Sustainable fat-loss and muscle-building systems built around consistency and accountability.",
+    src: "https://images.unsplash.com/photo-1594381898411-846e7d193883?auto=format&fit=crop&w=900&q=85",
   },
   {
     initials: "RV",
@@ -80,6 +82,7 @@ export const trainersDetailed = [
     experience: "9 years",
     certification: "S&C · Mobility",
     bio: "Athletic conditioning, mobility and work-capacity training for ambitious members and athletes.",
+    src: "https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&w=900&q=85",
   },
   {
     initials: "MP",
@@ -88,6 +91,7 @@ export const trainersDetailed = [
     experience: "6 years",
     certification: "CPT · Mobility",
     bio: "Movement restoration, functional strength and controlled progress for everyday performance.",
+    src: "https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=900&q=85",
   },
   {
     initials: "AS",
@@ -96,6 +100,7 @@ export const trainersDetailed = [
     experience: "5 years",
     certification: "CPT",
     bio: "Muscle-building programs centered on volume progression, technique and recoverable training.",
+    src: "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=900&q=85",
   },
   {
     initials: "KR",
@@ -104,6 +109,7 @@ export const trainersDetailed = [
     experience: "6 years",
     certification: "HIIT · Group Coach",
     bio: "High-energy group coaching with scalable sessions for conditioning, strength and fitness confidence.",
+    src: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=900&q=85",
   },
 ];
 
@@ -146,14 +152,14 @@ export const classSchedule = [
 ];
 
 export const galleryItems = [
-  { title: "Strength Floor", type: "Training zone" },
-  { title: "Free Weights", type: "Equipment" },
-  { title: "Conditioning Zone", type: "Training zone" },
-  { title: "Coach Session", type: "Coaching" },
-  { title: "Member Challenge", type: "Community" },
-  { title: "Recovery Corner", type: "Facility" },
-  { title: "Transformation Day", type: "Members" },
-  { title: "APEX Night Session", type: "Atmosphere" },
+  { title: "Strength Floor", type: "Training zone", src: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1200&q=85" },
+  { title: "Free Weights", type: "Equipment", src: "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=1200&q=85" },
+  { title: "Conditioning Zone", type: "Training zone", src: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=1200&q=85" },
+  { title: "Coach Session", type: "Coaching", src: "https://images.unsplash.com/photo-1567013127542-490d757e51fc?auto=format&fit=crop&w=1200&q=85" },
+  { title: "Member Challenge", type: "Community", src: "https://images.unsplash.com/photo-1594381898411-846e7d193883?auto=format&fit=crop&w=1200&q=85" },
+  { title: "Recovery Corner", type: "Facility", src: "https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1200&q=85" },
+  { title: "Transformation Day", type: "Members", src: "https://images.unsplash.com/photo-1579758629938-03607ccdbaba?auto=format&fit=crop&w=1200&q=85" },
+  { title: "APEX Night Session", type: "Atmosphere", src: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=1200&q=85" },
 ];
 
 export const transformationStories = [

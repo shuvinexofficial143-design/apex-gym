@@ -1,43 +1,28 @@
 import Link from "next/link";
+import { trainersDetailed } from "@/lib/public-data";
 import { FitnessPhoto } from "./FitnessPhoto";
 
-const trainers = [
-  {
-    name: "Arjun",
-    specialty: "Strength & Hypertrophy",
-    src: "https://images.unsplash.com/photo-1567013127542-490d757e51fc?auto=format&fit=crop&w=800&q=85",
-  },
-  {
-    name: "Maya",
-    specialty: "HIIT & Conditioning",
-    src: "https://images.unsplash.com/photo-1594381898411-846e7d193883?auto=format&fit=crop&w=800&q=85",
-  },
-  {
-    name: "Kabir",
-    specialty: "Mobility & Performance",
-    src: "https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&w=800&q=85",
-  },
-];
-
 export function TrainerShowcase() {
+  const featuredTrainers = trainersDetailed.slice(0, 3);
+
   return (
     <section className="section-shell">
       <div className="trainer-head">
         <div>
           <div className="eyebrow">EXPERT COACHES</div>
-          <h2>Real people behind the progress.</h2>
+          <h2>Real coaching behind every plan.</h2>
         </div>
         <Link href="/trainers" className="trainer-link">View all trainers →</Link>
       </div>
 
       <div className="trainer-grid">
-        {trainers.map((trainer) => (
+        {featuredTrainers.map((trainer) => (
           <article key={trainer.name} className="trainer-card">
             <FitnessPhoto src={trainer.src} alt={`${trainer.name} trainer`} className="trainer-photo" />
             <div className="trainer-overlay" />
             <div className="trainer-copy">
               <h3>{trainer.name}</h3>
-              <p>{trainer.specialty}</p>
+              <p>{trainer.speciality}</p>
             </div>
           </article>
         ))}
