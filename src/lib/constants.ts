@@ -1,8 +1,8 @@
 export const gymStats = [
-  { value: "2.4K+", label: "Active members" },
-  { value: "18", label: "Expert coaches" },
-  { value: "12K+", label: "Monthly workouts" },
-  { value: "4.9/5", label: "Member rating" },
+  { value: "COACHED", label: "Structured training" },
+  { value: "TRACKED", label: "Progress reviews" },
+  { value: "FLEXIBLE", label: "Membership support" },
+  { value: "CONNECTED", label: "Member experience" },
 ];
 
 export const programs = [
@@ -29,19 +29,19 @@ export const programs = [
 export const plans = [
   {
     name: "Essential",
-    price: "1,499",
+    price: "",
     featured: false,
     features: ["Gym floor access", "Basic fitness assessment", "Member dashboard access"],
   },
   {
     name: "Performance",
-    price: "2,499",
+    price: "",
     featured: true,
-    features: ["Everything in Essential", "Monthly coach review", "Classes + progress tracking"],
+    features: ["Everything in Essential", "Coach reviews", "Classes + progress tracking"],
   },
   {
     name: "Elite",
-    price: "4,999",
+    price: "",
     featured: false,
     features: ["Everything in Performance", "Personal training sessions", "Priority support"],
   },
@@ -49,42 +49,42 @@ export const plans = [
 
 export const trainers = [
   {
-    initials: "AK",
-    name: "Arjun Kapoor",
+    initials: "SC",
+    name: "Strength Coach",
     role: "Strength & Conditioning",
     bio: "Focused on barbell strength, movement quality and long-term athletic development.",
   },
   {
-    initials: "NS",
-    name: "Neha Sharma",
-    role: "Body Transformation",
+    initials: "TC",
+    name: "Transformation Coach",
+    role: "Body Composition",
     bio: "Combines sustainable training, accountability and measurable body-composition goals.",
   },
   {
-    initials: "RV",
-    name: "Rohit Verma",
-    role: "Performance Coach",
+    initials: "PC",
+    name: "Performance Coach",
+    role: "Athletic Performance",
     bio: "Builds high-output conditioning systems for athletes and ambitious everyday members.",
   },
 ];
 
 export const testimonials = [
   {
-    name: "Rahul Mehta",
-    result: "−11 kg · 5 months",
+    name: "Training clarity",
+    result: "Structured sessions",
     quote:
-      "The biggest difference was structure. I always knew what to train, what to track and what to improve next.",
+      "Programs keep the next training step clear, measurable and connected to a specific goal.",
   },
   {
-    name: "Ananya Singh",
-    result: "+4 kg lean mass · 7 months",
+    name: "Coaching support",
+    result: "Accountability",
     quote:
-      "The coaches made the gym feel simple. My strength improved and I finally became consistent.",
+      "Coach reviews keep technique, progression and consistency visible throughout the training journey.",
   },
   {
-    name: "Dev Patel",
-    result: "90-day performance block",
+    name: "Progress visibility",
+    result: "Trackable habits",
     quote:
-      "APEX feels serious without being intimidating. The tracking and coaching keep me accountable every week.",
+      "Attendance, workouts and progress tools make it easier to understand what is actually improving.",
   },
 ];

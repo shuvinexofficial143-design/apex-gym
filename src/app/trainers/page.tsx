@@ -3,6 +3,11 @@ import { PublicPageShell } from "@/components/public/PublicPageShell";
 import { TrainerGrid } from "@/components/public/TrainerGrid";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
+export const metadata = {
+  title: "Coaching Team",
+  description: "Explore APEX coaching specialties across strength, body composition, performance, mobility and group training.",
+};
+
 export default function TrainersPage() {
   return (
     <PublicPageShell>

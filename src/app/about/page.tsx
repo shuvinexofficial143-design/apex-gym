@@ -4,6 +4,11 @@ import { PublicPageShell } from "@/components/public/PublicPageShell";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { aboutFeatures } from "@/lib/public-data";
 
+export const metadata = {
+  title: "About APEX",
+  description: "Learn how APEX combines coach-led training, structured programs, progress tracking and a premium gym experience.",
+};
+
 export default function AboutPage() {
   return (
     <PublicPageShell>

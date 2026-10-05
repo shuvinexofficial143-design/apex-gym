@@ -1,3 +1,52 @@
-import Link from "next/link";import {MobileMenu} from "./MobileMenu";import {Button} from "@/components/ui/Button";import {ThemeToggle} from "@/components/ui/ThemeToggle";
-const links=[["Programs","/programs"],["Membership","/membership"],["Trainers","/trainers"],["Classes","/classes"]];
-export function Navbar(){return <header style={{position:"fixed",inset:"0 0 auto 0",zIndex:50,backdropFilter:"blur(18px)",background:"rgba(7,7,7,.82)",borderBottom:"1px solid rgba(255,255,255,.07)"}}><div className="container" style={{height:76,display:"flex",alignItems:"center",justifyContent:"space-between",gap:18}}><Link href="/" style={{display:"flex",alignItems:"center",gap:10}}><span style={{width:34,height:34,borderRadius:10,display:"grid",placeItems:"center",background:"var(--accent)",color:"#090909",fontWeight:1000}}>A</span><span style={{fontSize:20,fontWeight:1000}}>APEX GYM</span></Link><nav className="desktop-nav" style={{display:"flex",gap:24}}>{links.map(([l,h])=><Link key={h} href={h} className="muted" style={{fontSize:13,fontWeight:700}}>{l}</Link>)}</nav><div className="desktop-actions" style={{display:"flex",alignItems:"center",gap:9}}><Link href="/search" style={i}>⌕</Link><ThemeToggle/><Link href="/member/ai" style={{fontSize:12,fontWeight:1000,color:"var(--accent)"}}>AI Coach</Link><Link href="/auth/login" className="muted" style={{fontSize:12,fontWeight:900}}>Login</Link><Button href="/free-trial" size="sm">Free Trial</Button></div><MobileMenu/></div><style>{`@media(max-width:930px){.desktop-nav,.desktop-actions{display:none!important}}`}</style></header>}const i={width:40,height:40,borderRadius:12,display:"grid",placeItems:"center",border:"1px solid var(--line)",background:"#111"};
+import Link from "next/link";
+import { MobileMenu } from "./MobileMenu";
+import { Button } from "@/components/ui/Button";
+
+const links = [
+  ["Programs", "/programs"],
+  ["Membership", "/membership"],
+  ["Trainers", "/trainers"],
+  ["Classes", "/classes"],
+  ["Gallery", "/gallery"],
+];
+
+export function Navbar() {
+  return (
+    <header className="site-header">
+      <div className="container nav-inner">
+        <Link href="/" className="brand-link" aria-label="APEX GYM home">
+          <span className="brand-mark">A</span>
+          <span className="brand-name">APEX GYM</span>
+        </Link>
+
+        <nav className="desktop-nav" aria-label="Primary navigation">
+          {links.map(([label, href]) => (
+            <Link key={href} href={href} className="nav-link">{label}</Link>
+          ))}
+        </nav>
+
+        <div className="desktop-actions">
+          <Link href="/member" className="member-link">Member App</Link>
+          <Button href="/free-trial" size="sm">Free Trial</Button>
+        </div>
+
+        <MobileMenu />
+      </div>
+
+      <style>{`
+        .site-header{position:fixed;inset:0 0 auto 0;z-index:50;backdrop-filter:blur(18px);background:rgba(7,7,7,.84);border-bottom:1px solid rgba(255,255,255,.07)}
+        .nav-inner{height:76px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+        .brand-link{display:flex;align-items:center;gap:10px;flex:0 0 auto}
+        .brand-mark{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--accent);color:#090909;font-weight:1000}
+        .brand-name{font-size:20px;font-weight:1000;letter-spacing:-.03em}
+        .desktop-nav{display:flex;gap:22px;align-items:center}
+        .nav-link{color:var(--muted);font-size:13px;font-weight:800;transition:color .18s ease}
+        .nav-link:hover{color:#fff}
+        .desktop-actions{display:flex;align-items:center;gap:12px}
+        .member-link{font-size:12px;font-weight:1000;color:#fff}
+        @media(max-width:980px){.desktop-nav,.desktop-actions{display:none!important}}
+        @media(max-width:380px){.brand-name{font-size:17px}}
+      `}</style>
+    </header>
+  );
+}

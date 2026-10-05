@@ -3,6 +3,11 @@ import { PublicPageShell } from "@/components/public/PublicPageShell";
 import { TransformationStories } from "@/components/public/TransformationStories";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
+export const metadata = {
+  title: "Progress Tracking",
+  description: "See how APEX tracks body composition, strength progression and training consistency over time.",
+};
+
 export default function TransformationsPage() {
   return (
     <PublicPageShell>

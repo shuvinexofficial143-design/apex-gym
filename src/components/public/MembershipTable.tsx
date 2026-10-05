@@ -7,28 +7,21 @@ export function MembershipTable() {
       {membershipPlans.map((plan) => (
         <article
           key={plan.name}
-          className="glass-card"
+          className="glass-card membership-row"
           style={{
-            display: "grid",
-            gridTemplateColumns: "1.2fr .8fr 1.4fr auto",
-            gap: 24,
-            alignItems: "center",
-            padding: 26,
             borderColor: plan.featured ? "rgba(223,255,0,.38)" : undefined,
           }}
         >
           <div>
-            <div className="muted" style={{ fontSize: 12, textTransform: "uppercase", letterSpacing: ".12em" }}>
-              {plan.tag}
-            </div>
-            <h3 style={{ margin: "7px 0 0", fontSize: 26 }}>{plan.name}</h3>
+            <div className="muted membership-tag">{plan.tag}</div>
+            <h3>{plan.name}</h3>
           </div>
-          <div>
-            <strong style={{ fontSize: 32, letterSpacing: "-.04em" }}>₹{plan.price}</strong>
-            <div className="muted" style={{ fontSize: 12 }}>/ month</div>
+          <div className="membership-price">
+            <strong>Pricing on request</strong>
+            <span className="muted">Confirm the best option with the APEX team</span>
           </div>
-          <div className="muted" style={{ lineHeight: 1.6 }}>
-            {plan.features.slice(0, 3).join(" • ")}
+          <div className="muted membership-features">
+            {plan.features.slice(0, 4).join(" • ")}
           </div>
           <Button href="/free-trial" size="sm" variant={plan.featured ? "primary" : "ghost"}>
             Start Trial
@@ -37,9 +30,15 @@ export function MembershipTable() {
       ))}
 
       <style>{`
-        @media (max-width: 880px) {
-          article { grid-template-columns: 1fr !important; }
-        }
+        .membership-row{display:grid;grid-template-columns:1fr 1fr 1.4fr auto;gap:24px;align-items:center;padding:26px}
+        .membership-tag{font-size:12px;text-transform:uppercase;letter-spacing:.12em}
+        .membership-row h3{margin:7px 0 0;font-size:26px}
+        .membership-price{display:grid;gap:4px}
+        .membership-price strong{font-size:20px}
+        .membership-price span{font-size:11px;line-height:1.5}
+        .membership-features{line-height:1.6}
+        @media(max-width:880px){.membership-row{grid-template-columns:1fr 1fr}}
+        @media(max-width:620px){.membership-row{grid-template-columns:1fr}}
       `}</style>
     </div>
   );

@@ -4,6 +4,11 @@ import { PublicPageShell } from "@/components/public/PublicPageShell";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { membershipFaq } from "@/lib/public-data";
 
+export const metadata = {
+  title: "Gym Membership",
+  description: "Compare APEX membership levels for gym access, classes, coaching support and progress tracking.",
+};
+
 export default function MembershipPage() {
   return (
     <PublicPageShell>

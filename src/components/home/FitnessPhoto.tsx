@@ -5,11 +5,13 @@ export function FitnessPhoto({
   alt,
   priority = false,
   className = "",
+  sizes = "(max-width: 640px) calc(100vw - 28px), (max-width: 980px) 92vw, 50vw",
 }: {
   src: string;
   alt: string;
   priority?: boolean;
   className?: string;
+  sizes?: string;
 }) {
   return (
     <div className={`fitness-photo ${className}`}>
@@ -18,7 +20,7 @@ export function FitnessPhoto({
         alt={alt}
         fill
         priority={priority}
-        sizes="(max-width: 768px) 92vw, 46vw"
+        sizes={sizes}
         style={{ objectFit: "cover" }}
       />
     </div>

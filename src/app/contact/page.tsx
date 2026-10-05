@@ -3,6 +3,11 @@ import { PageHero } from "@/components/public/PageHero";
 import { PublicPageShell } from "@/components/public/PublicPageShell";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
+export const metadata = {
+  title: "Contact APEX",
+  description: "Contact APEX about memberships, coaching, facilities, classes and free trial visits.",
+};
+
 export default function ContactPage() {
   return (
     <PublicPageShell>

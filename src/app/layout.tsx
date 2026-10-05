@@ -1,37 +1,37 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { PWAInstallPrompt } from "@/components/pwa/PWAInstallPrompt";
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://apex-gym.example.com";
+import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(siteConfig.siteUrl),
   title: {
-    default: "APEX GYM | Train Beyond Limits",
+    default: "APEX GYM | Coach-Led Training & Membership",
     template: "%s | APEX GYM",
   },
   description:
-    "Premium gym membership, expert coaching, workouts, nutrition tracking, classes, rewards and AI-assisted fitness tools.",
+    "Coach-led gym training, structured programs, memberships, classes, progress tracking and a modern member experience.",
   applicationName: "APEX GYM",
   keywords: [
     "gym",
     "fitness",
     "personal training",
-    "workout tracking",
-    "nutrition",
+    "strength training",
     "gym membership",
+    "fitness classes",
+    "workout tracking",
   ],
   openGraph: {
     title: "APEX GYM",
-    description: "Train, track and progress with a premium digital fitness experience.",
+    description: "Coach-led training, structured programs and a modern member experience.",
     type: "website",
-    url: siteUrl,
+    url: siteConfig.siteUrl,
     siteName: "APEX GYM",
   },
   twitter: {
     card: "summary",
     title: "APEX GYM",
-    description: "Premium gym membership and digital fitness experience.",
+    description: "Coach-led gym training and structured fitness programs.",
   },
 };
 
@@ -48,11 +48,32 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "ExerciseGym",
+    name: siteConfig.name,
+    url: siteConfig.siteUrl,
+    ...(siteConfig.phone ? { telephone: siteConfig.phone } : {}),
+    ...(siteConfig.email ? { email: siteConfig.email } : {}),
+    ...(siteConfig.address
+      ? {
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: siteConfig.address,
+          },
+        }
+      : {}),
+  };
+
   return (
     <html lang="en">
       <body>
         {children}
         <PWAInstallPrompt />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
       </body>
     </html>
   );

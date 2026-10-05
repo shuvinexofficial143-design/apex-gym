@@ -8,7 +8,7 @@ export function RealVisualHero() {
   return (
     <section className="rv-hero">
       <div className="rv-hero-bg">
-        <FitnessPhoto src={heroImage} alt="Athlete training in a premium gym" priority className="rv-hero-photo" />
+        <FitnessPhoto src={heroImage} alt="Athlete training in a premium gym" priority className="rv-hero-photo" sizes="100vw" />
         <div className="rv-hero-overlay" />
       </div>
 

@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
+import { siteConfig } from "@/lib/site-config";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const site = process.env.NEXT_PUBLIC_SITE_URL || "https://apex-gym.example.com";
   const routes = [
     "",
     "/about",
@@ -14,13 +14,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/locations",
     "/contact",
     "/free-trial",
-    "/search",
   ];
 
   return routes.map((route) => ({
-    url: `${site}${route}`,
+    url: `${siteConfig.siteUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: route === "" ? "weekly" : "monthly",
-    priority: route === "" ? 1 : 0.7,
+    priority: route === "" ? 1 : route === "/free-trial" || route === "/membership" ? 0.9 : 0.7,
   }));
 }

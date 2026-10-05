@@ -3,6 +3,11 @@ import { PageHero } from "@/components/public/PageHero";
 import { PublicPageShell } from "@/components/public/PublicPageShell";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
+export const metadata = {
+  title: "Fitness Classes",
+  description: "Explore the APEX group training schedule for strength, conditioning, mobility and high-energy fitness sessions.",
+};
+
 export default function ClassesPage() {
   return (
     <PublicPageShell>

@@ -3,6 +3,11 @@ import { ProgramGrid } from "@/components/public/ProgramGrid";
 import { PublicPageShell } from "@/components/public/PublicPageShell";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
+export const metadata = {
+  title: "Training Programs",
+  description: "Explore APEX strength, muscle-building, fat-loss, foundation and athletic performance training programs.",
+};
+
 export default function ProgramsPage() {
   return (
     <PublicPageShell>

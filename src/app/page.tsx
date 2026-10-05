@@ -9,6 +9,7 @@ import { TrainerShowcase } from "@/components/home/TrainerShowcase";
 import { TransformationShowcase } from "@/components/home/TransformationShowcase";
 import { MobilePromoSection } from "@/components/home/MobilePromoSection";
 import { ShowcaseGallery } from "@/components/home/ShowcaseGallery";
+import { FinalCTASection } from "@/components/home/FinalCTASection";
 import { appShowcaseSlides } from "@/components/home/home-showcase-data";
 
 export default function Page() {
@@ -30,6 +31,7 @@ export default function Page() {
           slides={appShowcaseSlides}
         />
         <MobilePromoSection />
+        <FinalCTASection />
       </main>
       <Footer />
     </>

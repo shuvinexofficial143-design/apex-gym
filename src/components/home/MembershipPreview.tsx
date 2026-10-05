@@ -8,7 +8,7 @@ export function MembershipPreview() {
       <div className="container">
         <SectionHeading
           eyebrow="Membership"
-          title="Simple plans. Serious results."
+          title="Simple levels. Clear support."
           copy="Choose the level of gym access and coaching support that fits your goals, schedule and training style."
         />
 
@@ -24,37 +24,18 @@ export function MembershipPreview() {
               }}
             >
               {plan.featured ? (
-                <div
-                  style={{
-                    position: "absolute",
-                    top: 18,
-                    right: 18,
-                    padding: "7px 10px",
-                    borderRadius: 999,
-                    background: "var(--accent)",
-                    color: "#080808",
-                    fontSize: 11,
-                    fontWeight: 1000,
-                    textTransform: "uppercase",
-                  }}
-                >
-                  Most popular
-                </div>
+                <div className="plan-badge">Most popular</div>
               ) : null}
 
-              <div className="muted" style={{ fontSize: 13, textTransform: "uppercase", letterSpacing: ".13em" }}>
-                {plan.name}
-              </div>
-              <div style={{ marginTop: 22 }}>
-                <span style={{ fontSize: 50, fontWeight: 1000, letterSpacing: "-.06em" }}>
-                  ₹{plan.price}
-                </span>
-                <span className="muted"> / month</span>
+              <div className="muted plan-name">{plan.name}</div>
+              <div className="plan-pricing">
+                <strong>Pricing on request</strong>
+                <span className="muted">Choose after your trial or consultation</span>
               </div>
 
-              <div style={{ display: "grid", gap: 12, margin: "30px 0" }}>
+              <div className="plan-features">
                 {plan.features.map((feature) => (
-                  <div key={feature} style={{ display: "flex", gap: 10 }}>
+                  <div key={feature}>
                     <span className="accent">✓</span>
                     <span>{feature}</span>
                   </div>
@@ -67,6 +48,16 @@ export function MembershipPreview() {
             </article>
           ))}
         </div>
+
+        <style>{`
+          .plan-badge{position:absolute;top:18px;right:18px;padding:7px 10px;border-radius:999px;background:var(--accent);color:#080808;font-size:11px;font-weight:1000;text-transform:uppercase}
+          .plan-name{font-size:13px;text-transform:uppercase;letter-spacing:.13em}
+          .plan-pricing{display:grid;gap:5px;margin-top:24px}
+          .plan-pricing strong{font-size:26px}
+          .plan-pricing span{font-size:12px;line-height:1.5}
+          .plan-features{display:grid;gap:12px;margin:30px 0}
+          .plan-features>div{display:flex;gap:10px}
+        `}</style>
       </div>
     </section>
   );

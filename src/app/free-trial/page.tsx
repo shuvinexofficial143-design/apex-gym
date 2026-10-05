@@ -3,6 +3,11 @@ import { PublicPageShell } from "@/components/public/PublicPageShell";
 import { TrialForm } from "@/components/public/TrialForm";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
+export const metadata = {
+  title: "Book a Free Trial",
+  description: "Book an APEX gym trial by sharing your fitness goal, experience level and preferred training time.",
+};
+
 export default function FreeTrialPage() {
   return (
     <PublicPageShell>
