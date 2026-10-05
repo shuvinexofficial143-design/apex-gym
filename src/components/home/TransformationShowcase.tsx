@@ -5,16 +5,16 @@ export function TransformationShowcase() {
     <section className="section-shell">
       <div className="transform-wrap">
         <div className="transform-copy">
-          <div className="eyebrow">VISIBLE PROGRESS</div>
-          <h2>Track more than just weight.</h2>
+          <div className="eyebrow">MEASURABLE PROGRESS</div>
+          <h2>Make every training block visible.</h2>
           <p>
-            Combine body metrics, progress photos, strength records and training consistency in one visual story.
+            Bring body metrics, progress photos, strength records and training consistency into one clear member review.
           </p>
 
           <div className="transform-stats">
-            <div><strong>-6.4 kg</strong><span>sample change</span></div>
-            <div><strong>+22%</strong><span>strength trend</span></div>
-            <div><strong>84%</strong><span>plan adherence</span></div>
+            <div><strong>Body metrics</strong><span>Review change over time</span></div>
+            <div><strong>Strength records</strong><span>Track performance</span></div>
+            <div><strong>Consistency</strong><span>See training habits</span></div>
           </div>
         </div>
 
@@ -22,16 +22,16 @@ export function TransformationShowcase() {
           <div className="transform-image-card transform-before">
             <FitnessPhoto
               src="https://images.unsplash.com/photo-1579758629938-03607ccdbaba?auto=format&fit=crop&w=900&q=85"
-              alt="Fitness progress before training"
+              alt="Gym member training"
             />
-            <span>BEFORE</span>
+            <span>TRAINING</span>
           </div>
           <div className="transform-image-card transform-after">
             <FitnessPhoto
               src="https://images.unsplash.com/photo-1584863231364-2edc166de576?auto=format&fit=crop&w=900&q=85"
-              alt="Fitness progress after training"
+              alt="Strength training progress"
             />
-            <span>AFTER</span>
+            <span>PROGRESS REVIEW</span>
           </div>
         </div>
       </div>
@@ -75,14 +75,15 @@ export function TransformationShowcase() {
           background:rgba(255,255,255,.04);
           border:1px solid rgba(255,255,255,.05);
           display:grid;
-          gap:5px;
+          gap:7px;
         }
-        .transform-stats strong{ font-size:22px; }
+        .transform-stats strong{ font-size:16px; }
         .transform-stats span{
           color:#aeb5c0;
           font-size:10px;
           text-transform:uppercase;
           letter-spacing:.08em;
+          line-height:1.45;
         }
         .transform-images{
           display:grid;
@@ -126,7 +127,8 @@ export function TransformationShowcase() {
         @media(max-width:640px){
           .transform-wrap{ padding:18px; border-radius:28px; }
           .transform-stats{ grid-template-columns:1fr; }
-          .transform-images{ min-height:430px; }
+          .transform-images{ grid-template-columns:1fr; min-height:auto; }
+          .transform-image-card{ min-height:360px; }
         }
       `}</style>
     </section>

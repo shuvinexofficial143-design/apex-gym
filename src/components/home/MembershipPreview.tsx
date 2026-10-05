@@ -9,7 +9,7 @@ export function MembershipPreview() {
         <SectionHeading
           eyebrow="Membership"
           title="Simple plans. Serious results."
-          copy="Start with the level of support you need today. Membership upgrades, payments and member tools will expand in upcoming batches."
+          copy="Choose the level of gym access and coaching support that fits your goals, schedule and training style."
         />
 
         <div className="grid-3" style={{ marginTop: 44 }}>
@@ -61,8 +61,8 @@ export function MembershipPreview() {
                 ))}
               </div>
 
-              <Button href="#cta" variant={plan.featured ? "primary" : "ghost"} full>
-                Choose {plan.name}
+              <Button href="/free-trial" variant={plan.featured ? "primary" : "ghost"} full>
+                Start Free Trial
               </Button>
             </article>
           ))}

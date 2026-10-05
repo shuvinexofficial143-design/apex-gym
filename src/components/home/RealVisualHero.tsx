@@ -23,19 +23,19 @@ export function RealVisualHero() {
           </h1>
 
           <p className="rv-subtitle">
-            Premium coaching, AI-assisted planning, nutrition, recovery and a member app designed around
-            visible progress.
+            Coach-led training, structured programs, classes and progress tracking built around one goal:
+            helping members train with purpose.
           </p>
 
           <div className="rv-actions">
             <Link href="/free-trial" className="rv-primary">Start Free Trial</Link>
-            <Link href="/member/ai" className="rv-secondary">Try APEX AI</Link>
+            <Link href="/programs" className="rv-secondary">Explore Programs</Link>
           </div>
 
           <div className="rv-proof">
-            <div><strong>18+</strong><span>Coaches</span></div>
-            <div><strong>90+</strong><span>Weekly sessions</span></div>
-            <div><strong>4.9★</strong><span>Member rating</span></div>
+            <div><strong>COACH-LED</strong><span>Hands-on support</span></div>
+            <div><strong>STRUCTURED</strong><span>Goal-based plans</span></div>
+            <div><strong>TRACKABLE</strong><span>Visible progress</span></div>
           </div>
         </div>
 
@@ -77,13 +77,13 @@ export function RealVisualHero() {
           </div>
 
           <div className="rv-floating rv-floating-a">
-            <span className="rv-floating-kicker">AI COACH</span>
-            <strong>Personal plan ready</strong>
+            <span className="rv-floating-kicker">COACH PLAN</span>
+            <strong>Built around your goal</strong>
           </div>
 
           <div className="rv-floating rv-floating-b">
             <span className="rv-floating-kicker">PROGRESS</span>
-            <strong>+12% this month</strong>
+            <strong>Track every session</strong>
           </div>
         </div>
       </div>
@@ -181,7 +181,7 @@ export function RealVisualHero() {
           gap:5px;
         }
         .rv-proof strong{
-          font-size:30px;
+          font-size:18px;
           line-height:1;
         }
         .rv-proof span{
@@ -333,7 +333,7 @@ export function RealVisualHero() {
           .rv-title{ font-size:clamp(48px,15vw,78px); }
           .rv-subtitle{ font-size:15px; }
           .rv-proof{ gap:18px; }
-          .rv-proof strong{ font-size:25px; }
+          .rv-proof strong{ font-size:16px; }
           .rv-phone-wrap{ min-height:620px; }
           .rv-phone{
             width:min(100%,332px);

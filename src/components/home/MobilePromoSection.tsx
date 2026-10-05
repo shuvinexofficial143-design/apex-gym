@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { FitnessPhoto } from "./FitnessPhoto";
 
 export function MobilePromoSection() {
@@ -7,9 +7,9 @@ export function MobilePromoSection() {
       <div className="mobile-promo">
         <div className="mobile-promo-copy">
           <div className="eyebrow">YOUR GYM IN YOUR POCKET</div>
-          <h2>Workouts, food, mind, progress.</h2>
+          <h2>Workouts, food, recovery, progress.</h2>
           <p>
-            The website now visually sells the complete member experience instead of leaving large empty spaces.
+            Keep your training plan, nutrition guidance, classes and progress tools together between gym sessions.
           </p>
 
           <div className="mobile-promo-tags">
@@ -19,7 +19,7 @@ export function MobilePromoSection() {
             <span>Progress</span>
           </div>
 
-          <Link href="/member" className="mobile-promo-btn">Open Member Experience</Link>
+          <Link href="/member" className="mobile-promo-btn">Explore Member Experience</Link>
         </div>
 
         <div className="mobile-promo-phone">
@@ -32,7 +32,7 @@ export function MobilePromoSection() {
             </div>
             <div className="mobile-promo-panel">
               <span className="accent">{"TODAY'S PLAN"}</span>
-              <strong>Push â€¢ Pull â€¢ Core</strong>
+              <strong>Push • Pull • Core</strong>
               <div className="mobile-promo-progress"><span /></div>
             </div>
           </div>
@@ -157,4 +157,3 @@ export function MobilePromoSection() {
     </section>
   );
 }
-
