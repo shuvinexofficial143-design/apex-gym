@@ -9,7 +9,7 @@ export const aboutFeatures = [
   },
   {
     title: "Digital member journey",
-    copy: "Upcoming dashboards will connect attendance, workouts, diet, progress, bookings and membership status.",
+    copy: "Member tools connect attendance, workouts, diet, progress, bookings and membership status in one journey.",
   },
   {
     title: "Premium environment",
@@ -17,11 +17,11 @@ export const aboutFeatures = [
   },
   {
     title: "Community systems",
-    copy: "Future challenges, streaks, rewards and leaderboards will add motivation without distracting from real training.",
+    copy: "Challenges, streaks, rewards and leaderboards keep motivation visible without distracting from real training.",
   },
   {
     title: "Business intelligence",
-    copy: "Admin tools will later connect members, leads, renewals, revenue, attendance and retention in one place.",
+    copy: "Admin tools bring members, leads, renewals, revenue, attendance and retention into one operating view.",
   },
 ];
 
@@ -207,18 +207,18 @@ export const locations = [
 export const membershipFaq = [
   {
     question: "Can I start with a free trial?",
-    answer: "Yes. The Free Trial page is already included in this batch and will later connect to OTP, CRM and automated confirmations.",
+    answer: "Yes. Choose your goal and preferred training time on the Free Trial page, then confirm your visit with the APEX team.",
   },
   {
     question: "Can I upgrade my membership later?",
-    answer: "Yes. The product structure is being designed for plan upgrades, renewals and future online payments.",
+    answer: "Yes. Members can move between plans when they need a different level of access or coaching support.",
   },
   {
     question: "Are classes included?",
-    answer: "Performance and higher tiers can include selected classes. Real-time booking rules will be added later.",
+    answer: "Performance and higher tiers can include selected classes. Availability depends on the weekly schedule.",
   },
   {
     question: "Will I get a member dashboard?",
-    answer: "Yes. Authentication and the member dashboard are planned for Batch 03.",
+    answer: "Yes. The member dashboard brings membership, attendance, workouts and progress tools together in one place.",
   },
 ];

@@ -18,7 +18,7 @@ export default function AboutPage() {
           <SectionHeading
             eyebrow="Our standard"
             title="More than a room full of machines."
-            copy="We are designing APEX as a modern fitness platform where training, accountability, progress tracking and member service work together."
+            copy="APEX brings training, accountability, progress tracking and member service together in one modern fitness experience."
           />
           <FeatureGrid items={aboutFeatures} />
         </div>

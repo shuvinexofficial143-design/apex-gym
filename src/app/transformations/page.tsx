@@ -9,7 +9,7 @@ export default function TransformationsPage() {
       <PageHero
         eyebrow="Transformations"
         title="Proof over promises."
-        copy="Member stories will combine progress photos, weight changes, strength milestones and coaching context instead of empty before-and-after claims."
+        copy="Member progress is shown with measurable training context, strength milestones and consistent coaching support."
       />
       <section className="section">
         <div className="container">

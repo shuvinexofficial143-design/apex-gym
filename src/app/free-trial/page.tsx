@@ -9,7 +9,7 @@ export default function FreeTrialPage() {
       <PageHero
         eyebrow="Free trial"
         title="Experience APEX first."
-        copy="Tell us your goal and preferred training time. This form is prepared for future OTP verification, CRM lead creation and WhatsApp confirmation."
+        copy="Tell us your goal and preferred training time so the APEX team can prepare the right first-visit experience."
         note="No commitment"
       />
       <section className="section">

@@ -9,7 +9,7 @@ export default function LocationsPage() {
       <PageHero
         eyebrow="Locations"
         title="Find your APEX."
-        copy="A multi-branch structure ready for maps, live occupancy, branch-specific trainers, classes and membership availability."
+        copy="Explore APEX locations, training hours and the facilities available at each branch."
       />
       <section className="section">
         <div className="container">

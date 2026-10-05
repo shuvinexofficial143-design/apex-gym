@@ -9,7 +9,7 @@ export default function TrainersPage() {
       <PageHero
         eyebrow="Coaching team"
         title="Train with experts."
-        copy="Meet coaches focused on strength, body transformation and performance, with trainer booking and client dashboards planned next."
+        copy="Meet coaches focused on strength, body transformation and performance, with clear specialties, experience and coaching focus."
       />
       <section className="section">
         <div className="container">

@@ -39,7 +39,7 @@ export function ContactPanel() {
         <div className="eyebrow">Visit us</div>
         <h3 style={{ fontSize: 38, margin: "16px 0 10px" }}>Your strongest hour starts here.</h3>
         <p className="muted" style={{ lineHeight: 1.7 }}>
-          Branch maps, route directions and live branch information will be connected in later batches.
+          Call or email the APEX team for branch details, directions, memberships and trial bookings.
         </p>
       </div>
 

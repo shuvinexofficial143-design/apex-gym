@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { FormEvent, useState } from "react";
 
 export function TrialForm() {
@@ -13,11 +14,14 @@ export function TrialForm() {
   if (submitted) {
     return (
       <div className="glass-card" style={{ marginTop: 42, padding: 34 }}>
-        <div className="accent" style={{ fontWeight: 1000 }}>REQUEST RECEIVED</div>
-        <h3 style={{ fontSize: 34, margin: "10px 0" }}>Your free trial request is ready.</h3>
-        <p className="muted" style={{ lineHeight: 1.7, marginBottom: 0 }}>
-          This Batch uses a front-end demo confirmation. Backend storage, OTP and WhatsApp automation will be connected in later batches.
+        <div className="accent" style={{ fontWeight: 1000 }}>TRIAL DETAILS READY</div>
+        <h3 style={{ fontSize: 34, margin: "10px 0" }}>Choose the best way to confirm your visit.</h3>
+        <p className="muted" style={{ lineHeight: 1.7 }}>
+          Your preferred goal and training time are ready. Contact the APEX team to confirm your first visit.
         </p>
+        <Link href="/contact" className="accent" style={{ fontWeight: 1000 }}>
+          Contact APEX →
+        </Link>
       </div>
     );
   }
@@ -74,7 +78,7 @@ export function TrialForm() {
           cursor: "pointer",
         }}
       >
-        Request Free Trial
+        Continue Trial Request
       </button>
 
       <style>{`

@@ -9,7 +9,7 @@ export default function GalleryPage() {
       <PageHero
         eyebrow="Inside APEX"
         title="See the energy."
-        copy="A premium gallery shell for facility photography, member events, coaching sessions, equipment zones and future social media content."
+        copy="Explore facility zones, member energy, coaching sessions, equipment areas and the atmosphere inside APEX."
       />
       <section className="section">
         <div className="container">

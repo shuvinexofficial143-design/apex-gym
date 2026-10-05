@@ -9,7 +9,7 @@ export default function ClassesPage() {
       <PageHero
         eyebrow="Group training"
         title="Energy meets structure."
-        copy="Explore strength, mobility, conditioning and high-energy group sessions. Live seat booking will be connected in a later batch."
+        copy="Explore strength, mobility, conditioning and high-energy group sessions across the weekly schedule."
         note="Weekly schedule"
       />
       <section className="section">
@@ -17,7 +17,7 @@ export default function ClassesPage() {
           <SectionHeading
             eyebrow="This week"
             title="Find your next session."
-            copy="The schedule UI is ready for future real-time capacity, waiting list, trainer assignment and member booking."
+            copy="Choose a session that matches your goal, preferred time and training style."
           />
           <ClassSchedule />
         </div>
