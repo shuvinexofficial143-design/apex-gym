@@ -1,3 +1,59 @@
-import {MemberShell} from "@/components/member/MemberShell";
-const m=[["Body Weight","68.4 kg","−1.8 kg this month"],["Training Volume","42.8K kg","+9.4% this month"],["Attendance","17 visits","Goal: 22"],["Current Streak","8 days","Best: 14"]];
-export default function Page(){return <MemberShell title="Progress" subtitle="Track training output, consistency and body metrics over time."><div className="pm" style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:14}}>{m.map((x,i)=><article key={x[0]} className="glass-card card-hover" style={{padding:22,borderColor:i===0?"rgba(223,255,0,.28)":undefined}}><div className="muted" style={{fontSize:10}}>{x[0].toUpperCase()}</div><div style={{fontSize:31,fontWeight:1000,marginTop:12}}>{x[1]}</div><div className={i===0?"accent":"muted"} style={{fontSize:12,marginTop:8}}>{x[2]}</div></article>)}</div><div className="pg" style={{display:"grid",gridTemplateColumns:"1.15fr .85fr",gap:18,marginTop:18}}><div className="glass-card" style={{padding:26}}><div className="eyebrow">8-week trend</div><div style={{height:260,display:"flex",alignItems:"end",gap:12,marginTop:28}}>{[42,49,45,58,63,61,72,82].map((v,i)=><div key={i} style={{flex:1,height:`${v}%`,borderRadius:"12px 12px 4px 4px",background:i===7?"var(--accent)":"#292929"}}/>)}</div></div><div className="glass-card" style={{padding:26}}><div className="eyebrow">Recent milestones</div>{[["Bench Press","72.5 kg × 6"],["Back Squat","95 kg × 5"],["Deadlift","120 kg × 3"]].map(x=><div key={x[0]} style={{padding:13,borderRadius:13,border:"1px solid var(--line)",background:"#101010",marginTop:11}}><strong>{x[0]}</strong><div className="accent" style={{fontSize:12,marginTop:4}}>{x[1]}</div></div>)}</div></div><style>{`@media(max-width:1000px){.pm{grid-template-columns:repeat(2,1fr)!important}}@media(max-width:760px){.pg,.pm{grid-template-columns:1fr!important}}`}</style></MemberShell>}
+import { MemberShell } from "@/components/member/MemberShell";
+
+const metrics=[
+  ["Training Consistency","82%","Up this month"],
+  ["Strength Index","+14%","Current block"],
+  ["Attendance","17 visits","Goal: 22"],
+  ["Current Streak","8 days","Best: 14"]
+];
+
+export default function Page(){
+  return (
+    <MemberShell title="Progress" subtitle="Track training output, consistency and performance trends over time.">
+      <div className="pm">
+        {metrics.map((item,index)=>(
+          <article key={item[0]} className="glass-card card-hover progress-metric" style={{borderColor:index===0?"rgba(223,255,0,.28)":undefined}}>
+            <div className="muted">{item[0].toUpperCase()}</div>
+            <strong>{item[1]}</strong>
+            <span className={index===0?"accent":"muted"}>{item[2]}</span>
+          </article>
+        ))}
+      </div>
+
+      <div className="pg">
+        <div className="glass-card trend-card">
+          <div className="eyebrow">8-week trend</div>
+          <div className="trend-bars">
+            {[42,49,45,58,63,61,72,82].map((value,index)=>(
+              <div key={index} style={{height:`${value}%`,background:index===7?"var(--accent)":"#292929"}} />
+            ))}
+          </div>
+        </div>
+
+        <div className="glass-card milestone-card">
+          <div className="eyebrow">Recent milestones</div>
+          {[
+            ["Strength block","Progressing"],
+            ["Attendance target","On track"],
+            ["Recovery habits","Improving"]
+          ].map(item=>(
+            <div key={item[0]} className="milestone">
+              <strong>{item[0]}</strong>
+              <div className="accent">{item[1]}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <style>{`
+        .pm{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+        .progress-metric{padding:22px}.progress-metric .muted:first-child{font-size:10px}.progress-metric strong{display:block;font-size:31px;margin-top:12px}.progress-metric span{display:block;font-size:12px;margin-top:8px}
+        .pg{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;margin-top:18px}
+        .trend-card,.milestone-card{padding:26px}.trend-bars{height:260px;display:flex;align-items:end;gap:12px;margin-top:28px}.trend-bars>div{flex:1;border-radius:12px 12px 4px 4px}
+        .milestone{padding:13px;border-radius:13px;border:1px solid var(--line);background:#101010;margin-top:11px}.milestone .accent{font-size:12px;margin-top:4px}
+        @media(max-width:1000px){.pm{grid-template-columns:repeat(2,1fr)}}
+        @media(max-width:760px){.pg,.pm{grid-template-columns:1fr}}
+      `}</style>
+    </MemberShell>
+  );
+}

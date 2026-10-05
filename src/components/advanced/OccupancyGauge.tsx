@@ -1,1 +1,43 @@
-import {occupancy} from "@/lib/advanced-data";export function OccupancyGauge(){const p=Math.round(occupancy.current/occupancy.capacity*100);return <div className="og2" style={{display:"grid",gridTemplateColumns:".78fr 1.22fr",gap:18}}><div className="glass-card" style={{padding:28,display:"grid",placeItems:"center"}}><div style={{width:220,height:220,borderRadius:"50%",display:"grid",placeItems:"center",background:`conic-gradient(var(--accent) ${p}%,#1a1a1a ${p}% 100%)`}}><div style={{width:168,height:168,borderRadius:"50%",display:"grid",placeItems:"center",background:"#0c0c0c",textAlign:"center"}}><div><div style={{fontSize:52,fontWeight:1000}}>{p}%</div><div className="muted" style={{fontSize:11}}>OCCUPIED</div></div></div></div></div><div className="glass-card" style={{padding:28}}><div className="eyebrow">Live gym load</div><h2 style={{fontSize:34,margin:"14px 0 8px"}}>{occupancy.current} members inside</h2><p className="muted">Best low-traffic window: <strong className="accent">{occupancy.bestTime}</strong></p>{occupancy.hours.map(x=><div key={x.time} style={{display:"grid",gridTemplateColumns:"70px 1fr 60px",gap:12,alignItems:"center",marginTop:14}}><strong>{x.time}</strong><div style={{height:10,borderRadius:999,background:"#1a1a1a",overflow:"hidden"}}><div style={{width:`${x.level}%`,height:"100%",background:x.level>80?"var(--accent)":"#5c6a00"}}/></div><span className="muted">{x.level}%</span></div>)}</div><style>{`@media(max-width:760px){.og2{grid-template-columns:1fr!important}}`}</style></div>}
+import { occupancy } from "@/lib/advanced-data";
+
+export function OccupancyGauge(){
+  const percent=Math.round(occupancy.current/occupancy.capacity*100);
+
+  return (
+    <div className="occupancy-grid">
+      <div className="glass-card occupancy-gauge-card">
+        <div className="occupancy-ring" style={{background:`conic-gradient(var(--accent) ${percent}%,#1a1a1a ${percent}% 100%)`}}>
+          <div>
+            <strong>{percent}%</strong>
+            <span className="muted">LOAD INDEX</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="glass-card occupancy-detail">
+        <div className="eyebrow">Estimated gym load</div>
+        <h2>{percent}% capacity indicator</h2>
+        <p className="muted">Suggested lower-traffic window: <strong className="accent">{occupancy.bestTime}</strong></p>
+        {occupancy.hours.map(item=>(
+          <div key={item.time} className="occupancy-row">
+            <strong>{item.time}</strong>
+            <div><span style={{width:`${item.level}%`}} /></div>
+            <span className="muted">{item.level}%</span>
+          </div>
+        ))}
+      </div>
+
+      <style>{`
+        .occupancy-grid{display:grid;grid-template-columns:.78fr 1.22fr;gap:18px}
+        .occupancy-gauge-card{padding:28px;display:grid;place-items:center}
+        .occupancy-ring{width:220px;height:220px;border-radius:50%;display:grid;place-items:center}
+        .occupancy-ring>div{width:168px;height:168px;border-radius:50%;display:grid;place-items:center;background:#0c0c0c;text-align:center}
+        .occupancy-ring strong{display:block;font-size:52px}.occupancy-ring span{display:block;font-size:11px}
+        .occupancy-detail{padding:28px}.occupancy-detail h2{font-size:34px;margin:14px 0 8px}
+        .occupancy-row{display:grid;grid-template-columns:70px 1fr 60px;gap:12px;align-items:center;margin-top:14px}
+        .occupancy-row>div{height:10px;border-radius:999px;background:#1a1a1a;overflow:hidden}.occupancy-row>div span{display:block;height:100%;background:var(--accent)}
+        @media(max-width:760px){.occupancy-grid{grid-template-columns:1fr}}
+      `}</style>
+    </div>
+  );
+}

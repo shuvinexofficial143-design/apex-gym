@@ -3,11 +3,11 @@
 import { FormEvent, useState } from "react";
 
 export function NotificationComposer() {
-  const [sent, setSent] = useState(false);
+  const [prepared, setPrepared] = useState(false);
 
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setSent(true);
+    setPrepared(true);
   }
 
   return (
@@ -28,8 +28,8 @@ export function NotificationComposer() {
         <select style={field}>
           <option>In-app</option>
           <option>Email</option>
-          <option>WhatsApp Ready</option>
-          <option>SMS Ready</option>
+          <option>WhatsApp</option>
+          <option>SMS</option>
         </select>
       </label>
 
@@ -43,8 +43,8 @@ export function NotificationComposer() {
         <textarea required placeholder="Write notification..." style={{ ...field, minHeight: 140, padding: 14 }} />
       </label>
 
-      <button style={button}>Send Notification</button>
-      {sent ? <div className="accent" style={{ fontWeight: 900 }}>Notification queued in demo mode.</div> : null}
+      <button style={button}>Prepare Notification</button>
+      {prepared ? <div className="accent" style={{ fontWeight: 900 }}>Notification draft prepared in the workspace.</div> : null}
     </form>
   );
 }

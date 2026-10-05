@@ -38,7 +38,7 @@ export function AIChat() {
         body: JSON.stringify({
           mode: "chat",
           messages: nextMessages,
-          profile: { goal: "Muscle gain", level: "Intermediate", daysPerWeek: 4, preferredTime: "Evening" },
+          profile: { goal: "General fitness", level: "Intermediate", daysPerWeek: 4 },
         }),
       });
 
@@ -104,7 +104,7 @@ export function AIChat() {
 
       <section className="glass-card ai-chat-panel" style={{ minHeight: 650, height: "min(72svh, 760px)", display: "grid", gridTemplateRows: "auto 1fr auto", overflow: "hidden" }}>
         <div style={{ minHeight: 58, padding: "12px 16px", borderBottom: "1px solid var(--line)", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, background: "rgba(10,10,10,.72)" }}>
-          <div><strong>APEX AI</strong><div className="muted" style={{ fontSize: 10, marginTop: 3 }}>GPT-4o mini · Fitness assistant</div></div>
+          <div><strong>APEX AI</strong><div className="muted" style={{ fontSize: 10, marginTop: 3 }}>Fitness guidance · Live when connected</div></div>
           <div style={{ display: "flex", gap: 8 }}>
             <button type="button" onClick={() => void regenerate()} disabled={loading || messages.length < 3} style={toolbarButton}>↻</button>
             <button type="button" onClick={() => setMessages([initialMessage])} disabled={loading} style={toolbarButton}>Clear</button>

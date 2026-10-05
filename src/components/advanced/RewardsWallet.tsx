@@ -13,7 +13,7 @@ export function RewardsWallet() {
       return;
     }
     setPoints((value) => value - cost);
-    setMessage(`${label} redeemed in demo mode.`);
+    setMessage(`${label} added to your reward activity.`);
   }
 
   return (

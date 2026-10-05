@@ -4,7 +4,7 @@ import { useState } from "react";
 
 export function ReferralCard() {
   const [copied, setCopied] = useState(false);
-  const code = "APEX-VP20481";
+  const code = "APEX-MEMBER";
 
   async function copyCode() {
     try {
@@ -20,39 +20,33 @@ export function ReferralCard() {
       <div className="eyebrow">Referral program</div>
       <h2 style={{ fontSize: 38, margin: "14px 0 8px" }}>Invite friends. Earn rewards.</h2>
       <p className="muted" style={{ lineHeight: 1.7 }}>
-        Share your referral code. Future backend logic can award points after a verified trial or paid membership.
+        Share a member referral code and keep successful invites connected to your rewards activity.
       </p>
 
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          gap: 16,
-          padding: 18,
-          borderRadius: 16,
-          border: "1px solid var(--line)",
-          background: "#0f0f0f",
-          marginTop: 22,
-          flexWrap: "wrap",
-        }}
-      >
-        <strong style={{ fontSize: 24, letterSpacing: ".08em" }}>{code}</strong>
+      <div className="ref-code">
+        <strong>{code}</strong>
         <button type="button" onClick={copyCode} style={button}>{copied ? "Copied ✓" : "Copy Code"}</button>
       </div>
 
       <div className="grid-3" style={{ marginTop: 18 }}>
         {[
-          ["8", "Successful invites"],
-          ["2,400", "Reward points"],
-          ["₹600", "Estimated rewards"],
+          ["INVITES", "Referral activity"],
+          ["POINTS", "Reward tracking"],
+          ["BENEFITS", "Member rewards"],
         ].map(([value, label]) => (
-          <div key={label} style={{ padding: 18, borderRadius: 15, border: "1px solid var(--line)", background: "#101010" }}>
-            <div style={{ fontSize: 30, fontWeight: 1000 }}>{value}</div>
-            <div className="muted" style={{ fontSize: 12, marginTop: 6 }}>{label}</div>
+          <div key={label} className="ref-stat">
+            <div>{value}</div>
+            <span className="muted">{label}</span>
           </div>
         ))}
       </div>
+
+      <style>{`
+        .ref-code{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px;border-radius:16px;border:1px solid var(--line);background:#0f0f0f;margin-top:22px;flex-wrap:wrap}
+        .ref-code strong{font-size:24px;letter-spacing:.08em}
+        .ref-stat{padding:18px;border-radius:15px;border:1px solid var(--line);background:#101010}
+        .ref-stat>div{font-size:20px;font-weight:1000}.ref-stat span{font-size:12px;display:block;margin-top:6px}
+      `}</style>
     </div>
   );
 }

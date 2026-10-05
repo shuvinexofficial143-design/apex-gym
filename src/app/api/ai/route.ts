@@ -13,10 +13,7 @@ type AIRequest = {
 
 const OPENAI_URL = "https://api.openai.com/v1/chat/completions";
 
-function systemPrompt(
-  mode: AIRequest["mode"],
-  profile?: Record<string, unknown>,
-) {
+function systemPrompt(mode: AIRequest["mode"], profile?: Record<string, unknown>) {
   const base = `
 You are APEX AI, a fitness assistant inside a premium gym member platform.
 
@@ -48,9 +45,9 @@ Create practical meal structures with approximate calories and protein. Avoid me
 Answer questions about training, recovery, general nutrition structure and gym usage.`;
 }
 
-function demoFallback(mode: AIRequest["mode"]) {
+function fallbackResponse(mode: AIRequest["mode"]) {
   if (mode === "workout") {
-    return `DEMO AI MODE
+    return `Live AI coaching is unavailable right now, so here is a general training structure you can use as a starting point.
 
 Day 1 — Upper Strength
 • Bench Press — 4 × 6
@@ -71,7 +68,7 @@ When all target reps are completed with good form, add a small amount of load ne
   }
 
   if (mode === "diet") {
-    return `DEMO AI MODE
+    return `Live AI coaching is unavailable right now, so here is a general meal structure you can adapt to your own targets.
 
 Breakfast
 • Oats + milk + banana + protein source
@@ -85,35 +82,28 @@ Pre-workout
 Dinner
 • Roti/rice + protein source + vegetables + salad
 
-Use your own calorie and protein targets from the APEX calculators and adjust portion sizes to those targets.`;
+Use your own calorie and protein targets from the APEX calculators and adjust portions accordingly.`;
   }
 
-  return `I’m currently running in DEMO AI MODE because OPENAI_API_KEY is not configured yet.
-
-Once the OpenAI API key is added, I can answer live fitness questions and generate workout or diet structures using GPT-4o mini.`;
+  return `Live AI coaching is unavailable right now. You can still use the workout, nutrition, progress and calculator tools in the APEX member workspace.`;
 }
 
 export async function POST(request: Request) {
   try {
     const body = (await request.json()) as AIRequest;
     const mode = body.mode ?? "chat";
-    const messages = Array.isArray(body.messages)
-      ? body.messages.slice(-12)
-      : [];
+    const messages = Array.isArray(body.messages) ? body.messages.slice(-12) : [];
 
     if (messages.length === 0) {
-      return NextResponse.json(
-        { error: "At least one message is required." },
-        { status: 400 },
-      );
+      return NextResponse.json({ error: "At least one message is required." }, { status: 400 });
     }
 
     const apiKey = process.env.OPENAI_API_KEY;
 
     if (!apiKey) {
       return NextResponse.json({
-        text: demoFallback(mode),
-        provider: "demo",
+        text: fallbackResponse(mode),
+        provider: "offline",
       });
     }
 
@@ -128,10 +118,7 @@ export async function POST(request: Request) {
         temperature: 0.4,
         max_tokens: 1200,
         messages: [
-          {
-            role: "system",
-            content: systemPrompt(mode, body.profile),
-          },
+          { role: "system", content: systemPrompt(mode, body.profile) },
           ...messages.map((message) => ({
             role: message.role,
             content: message.content,
@@ -143,33 +130,25 @@ export async function POST(request: Request) {
 
     if (!response.ok) {
       const detail = await response.text();
-      console.error(
-        "OpenAI API error:",
-        response.status,
-        detail.slice(0, 500),
-      );
+      console.error("OpenAI API error:", response.status, detail.slice(0, 500));
 
       return NextResponse.json({
-        text: demoFallback(mode),
-        provider: "demo",
-        warning: "Live OpenAI request failed; demo response returned.",
+        text: fallbackResponse(mode),
+        provider: "offline",
+        warning: "Live AI request was unavailable; general guidance returned.",
       });
     }
 
     const data = (await response.json()) as {
-      choices?: Array<{
-        message?: {
-          content?: string;
-        };
-      }>;
+      choices?: Array<{ message?: { content?: string } }>;
     };
 
     const text = data.choices?.[0]?.message?.content?.trim();
 
     if (!text) {
       return NextResponse.json({
-        text: demoFallback(mode),
-        provider: "demo",
+        text: fallbackResponse(mode),
+        provider: "offline",
       });
     }
 
@@ -180,10 +159,6 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     console.error("AI route failure:", error);
-
-    return NextResponse.json(
-      { error: "AI request failed." },
-      { status: 500 },
-    );
+    return NextResponse.json({ error: "AI request failed." }, { status: 500 });
   }
 }

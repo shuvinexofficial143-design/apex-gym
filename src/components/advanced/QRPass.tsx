@@ -6,7 +6,7 @@ export function QRPass() {
   const [active, setActive] = useState(true);
 
   const cells = useMemo(() => {
-    const seed = "APX-20481-2026";
+    const seed = "APX-MEMBER-PASS";
     return Array.from({ length: 21 * 21 }, (_, index) => {
       const code = seed.charCodeAt(index % seed.length);
       return ((index * 17 + code * 7 + Math.floor(index / 21) * 11) % 13) < 6;
@@ -14,79 +14,42 @@ export function QRPass() {
   }, []);
 
   return (
-    <div className="qr-layout" style={{ display: "grid", gridTemplateColumns: ".9fr 1.1fr", gap: 18 }}>
-      <div className="glass-card" style={{ padding: 28, display: "grid", placeItems: "center" }}>
-        <div
-          style={{
-            background: "#fff",
-            padding: 18,
-            borderRadius: 22,
-            opacity: active ? 1 : 0.35,
-            filter: active ? "none" : "grayscale(1)",
-          }}
-        >
-          <div
-            style={{
-              width: 252,
-              height: 252,
-              display: "grid",
-              gridTemplateColumns: "repeat(21, 1fr)",
-              gridTemplateRows: "repeat(21, 1fr)",
-              gap: 1,
-              background: "#fff",
-            }}
-          >
-            {cells.map((on, index) => (
-              <span key={index} style={{ background: on ? "#080808" : "#fff" }} />
-            ))}
+    <div className="qr-layout">
+      <div className="glass-card qr-code-card">
+        <div className="qr-code" style={{ opacity: active ? 1 : .35, filter: active ? "none" : "grayscale(1)" }}>
+          <div className="qr-cells">
+            {cells.map((on, index) => <span key={index} style={{ background: on ? "#080808" : "#fff" }} />)}
           </div>
         </div>
       </div>
 
-      <div className="glass-card" style={{ padding: 30 }}>
-        <div className="accent" style={{ fontSize: 12, fontWeight: 1000 }}>DIGITAL MEMBER PASS</div>
-        <h2 style={{ fontSize: 40, margin: "12px 0 6px" }}>Vishal Parmar</h2>
+      <div className="glass-card qr-info">
+        <div className="accent qr-kicker">DIGITAL MEMBER PASS</div>
+        <h2>APEX Member</h2>
         <div className="muted">Member ID · APX-20481</div>
 
-        <div style={{ display: "grid", gap: 12, marginTop: 28 }}>
-          <div style={row}><span className="muted">Plan</span><strong>Performance</strong></div>
-          <div style={row}><span className="muted">Branch</span><strong>APEX Central</strong></div>
-          <div style={row}><span className="muted">Valid until</span><strong>31 Oct 2026</strong></div>
-          <div style={row}><span className="muted">Status</span><strong className={active ? "accent" : "muted"}>{active ? "ACTIVE" : "PAUSED"}</strong></div>
+        <div className="qr-rows">
+          <div><span className="muted">Plan</span><strong>Performance</strong></div>
+          <div><span className="muted">Club</span><strong>APEX Performance Club</strong></div>
+          <div><span className="muted">Access</span><strong>Member entry</strong></div>
+          <div><span className="muted">Status</span><strong className={active ? "accent" : "muted"}>{active ? "ACTIVE" : "PAUSED"}</strong></div>
         </div>
 
-        <button
-          type="button"
-          onClick={() => setActive((value) => !value)}
-          style={{
-            marginTop: 24,
-            minHeight: 46,
-            padding: "0 17px",
-            borderRadius: 12,
-            border: "1px solid var(--line)",
-            background: active ? "#111" : "var(--accent)",
-            color: active ? "#fff" : "#080808",
-            fontWeight: 1000,
-            cursor: "pointer",
-          }}
-        >
-          {active ? "Demo: Pause Pass" : "Demo: Activate Pass"}
+        <button type="button" onClick={() => setActive((value) => !value)} className={active ? "pass-toggle" : "pass-toggle active"}>
+          {active ? "Pause pass" : "Activate pass"}
         </button>
       </div>
 
       <style>{`
-        @media(max-width:760px){
-          .qr-layout{grid-template-columns:1fr!important}
-        }
+        .qr-layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:18px}
+        .qr-code-card{padding:28px;display:grid;place-items:center}
+        .qr-code{background:#fff;padding:18px;border-radius:22px}
+        .qr-cells{width:252px;height:252px;display:grid;grid-template-columns:repeat(21,1fr);grid-template-rows:repeat(21,1fr);gap:1px;background:#fff}
+        .qr-info{padding:30px}.qr-kicker{font-size:12px;font-weight:1000}.qr-info h2{font-size:40px;margin:12px 0 6px}
+        .qr-rows{display:grid;gap:12px;margin-top:28px}.qr-rows>div{display:flex;justify-content:space-between;gap:18px;padding:12px 0;border-bottom:1px solid var(--line)}
+        .pass-toggle{margin-top:24px;min-height:46px;padding:0 17px;border-radius:12px;border:1px solid var(--line);background:#111;color:#fff;font-weight:1000;cursor:pointer}.pass-toggle.active{background:var(--accent);color:#080808;border-color:var(--accent)}
+        @media(max-width:760px){.qr-layout{grid-template-columns:1fr}.qr-cells{width:min(252px,68vw);height:min(252px,68vw)}}
       `}</style>
     </div>
   );
 }
-
-const row = {
-  display: "flex",
-  justifyContent: "space-between",
-  gap: 18,
-  padding: "12px 0",
-  borderBottom: "1px solid var(--line)",
-};
